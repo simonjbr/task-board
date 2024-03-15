@@ -15,7 +15,7 @@ function createTaskCard(task) {
 	const $taskBodyEl = $('<div>').addClass("card-body");
 	const $taskDescEl = $('<p>').addClass("card-text").text(task.description);
 	const $taskDueDateEl = $('<p>').addClass("card-text").text(task.dueDate);
-	const $taskDeleteBtnEl = $('<button>').addClass("btn btn-danger delete btn-delete-project").text("delete").attr("data-task-id", task.id);
+	const $taskDeleteBtnEl = $('<button>').addClass("btn btn-danger delete btn-delete-task").text("delete").attr("data-task-id", task.id);
 
 	// set background colour based on the due date
 	if (task.dueDate && task.status !== 'done') {
@@ -139,6 +139,9 @@ $(document).ready(function () {
 
 	// form submit event listener
 	$('#task-form').on("submit", handleAddTask);
+
+	// delete task event listener
+	$('#task-list').on("click", ".btn-delete-task", handleDeleteTask);
 	
 
 });
