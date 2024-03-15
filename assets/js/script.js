@@ -101,11 +101,6 @@ function handleAddTask(event) {
 	const dueDateInput = $('#due-date-input');
 	const descriptionInput = $('#description-input');
 
-	// log inputs to console
-	console.log(titleInput.val());
-	console.log(dueDateInput.val());
-	console.log(descriptionInput.val());
-
 	// create new task object
 	const newTask = {
 		id: generateTaskId(),
