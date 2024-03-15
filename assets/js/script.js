@@ -11,7 +11,7 @@ function generateTaskId() {
 function createTaskCard(task) {
 	// create all elements for the task card
 	const $taskCardEl = $('<div>').addClass("card project-card draggable my-3").attr("data-task-id", task.id);
-	const $taskTitleEl = $('<h4>').addClass("card-header h4").text(task.name);
+	const $taskTitleEl = $('<h4>').addClass("card-header h4").text(task.title);
 	const $taskBodyEl = $('<div>').addClass("card-body");
 	const $taskDescEl = $('<p>').addClass("card-text").text(task.description);
 	const $taskDueDateEl = $('<p>').addClass("card-text").text(task.dueDate);
@@ -88,6 +88,40 @@ function renderTaskList() {
 // Todo: create a function to handle adding a new task
 function handleAddTask(event) {
 
+	// prevent default form behaviour
+	event.preventDefault();
+
+	// get references to input fields
+	const titleInput = $('#title-input');
+	const dueDateInput = $('#due-date-input');
+	const descriptionInput = $('#description-input');
+
+	// log inputs to console
+	console.log(titleInput.val());
+	console.log(dueDateInput.val());
+	console.log(descriptionInput.val());
+
+	// create new task object
+	const newTask = {
+		id: generateTaskId(),
+		title: titleInput.val(),
+		dueDate: dueDateInput.val(),
+		description: descriptionInput.val(),
+		status: "to-do",
+	};
+
+	// push new task object on to existing array
+	taskList.push(newTask);
+
+	// save updated array to localStorage
+	localStorage.setItem("tasks", JSON.stringify(taskList));
+
+	// render all objects from tasks in localStorage
+	renderTaskList();
+
+	// clear form inputs
+	$('#task-form')[0].reset();
+
 }
 
 // Todo: create a function to handle deleting a task
@@ -102,5 +136,9 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+
+	// form submit event listener
+	$('#task-form').on("submit", handleAddTask);
+	
 
 });
