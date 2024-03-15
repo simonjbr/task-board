@@ -127,6 +127,23 @@ function handleAddTask(event) {
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
 
+	// get target's task id
+	const taskId = $(event.target).attr('data-task-id');
+
+	// loop through taskList and remove the task with the matching id
+	for (let i = 0; i < taskList.length; i++) {
+		const el = taskList[i];
+		
+		if (el.id === taskId) {
+			taskList = taskList.toSpliced(i, 1);
+		}
+	}
+
+	// save updated array to localStorage
+	localStorage.setItem("tasks", JSON.stringify(taskList));
+
+	// render all objects from tasks in localStorage
+	renderTaskList();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
