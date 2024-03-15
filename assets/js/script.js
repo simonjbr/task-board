@@ -168,5 +168,7 @@ $(document).ready(function () {
 	// delete task event listener
 	$('#task-list').on("click", ".btn-delete-task", handleDeleteTask);
 	
+	// make due date field a datepicker
+	$('#due-date-input').datepicker();
 
 });
