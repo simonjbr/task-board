@@ -1,4 +1,4 @@
-# <task-board>
+# task-board
 
 ## Description
 
